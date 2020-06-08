@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos en Stock</title>
+</head>
+<body>
+
+{% for producto in productos %}
+
+    <div>
+        <h2>Producto: {{ producto.nombre }}</h2>
+        <p>Codigo de Barras: {{ producto.codigo_de_barras }}</p>
+        <p>Categoria : {{ producto.categoria }}</p>
+        <p>Fecha de última modificación: {{ producto.fecha_ultima_modificacion }}</p>
+
+    </div>
+{% endfor %}
+
+</body>
+</html>
