@@ -1,0 +1,10 @@
+{% extends 'LibroDiario/base.html' %}
+
+{% block content %}
+    <h2>Nuevo Producto</h2>
+    <form method="POST" class="product-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="Submit" class="save btn btn-default">Guardar</button>
+    </form>
+{% endblock %}
+

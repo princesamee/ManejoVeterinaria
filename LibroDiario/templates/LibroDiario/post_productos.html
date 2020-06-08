@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Productos en Stock</title>
-</head>
-<body>
+{% extends 'LibroDiario/base.html' %}
 
-{% for producto in productos %}
+{% block content %}
+    <h1>Lista de productos</h1>
+    {% for producto in productos %}
 
-    <div>
-        <h2>Producto: {{ producto.nombre }}</h2>
-        <p>Codigo de Barras: {{ producto.codigo_de_barras }}</p>
-        <p>Categoria : {{ producto.categoria }}</p>
-        <p>Fecha de última modificación: {{ producto.fecha_ultima_modificacion }}</p>
+        <div class="producto">
+            <h2><a href="{% url 'detalle_producto' pk=producto.pk %}">Producto: {{ producto.nombre }}</a></h2>
+            <p>Codigo de Barras: {{ producto.codigo_de_barras }}</p>
+            <p>Categoria : {{ producto.categoria }}</p>
+            <div class="date"><p>Fecha de última modificación: {{ producto.fecha_ultima_modificacion }}</p></div>
+        </div>
 
-    </div>
-{% endfor %}
-
-</body>
-</html>
+    {% endfor %}
+{% endblock %}
