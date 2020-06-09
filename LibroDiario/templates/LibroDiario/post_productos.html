@@ -2,7 +2,11 @@
 
 {% block content %}
     <h1>Lista de productos</h1>
-    {% for producto in productos %}
+    <form method="get">
+        {{ filter.form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
+    {% for producto in filter.qs %}
 
         <div class="producto">
             <h2><a href="{% url 'detalle_producto' pk=producto.pk %}">Producto: {{ producto.nombre }}</a></h2>

@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 
+from LibroDiario.filters import FiltroProductos
 from LibroDiario.forms import FormularioProducto
 from .models import Producto
 
 
 def post_productos(request):
     productos = Producto.objects.all().order_by('nombre')
-    return render(request, 'LibroDiario/post_productos.html', {'productos': productos})
+    filtro_productos = FiltroProductos(request.GET, queryset=productos)
+    return render(request, 'LibroDiario/post_productos.html', {'filter': filtro_productos})
 
 
 def detalle_producto(request, pk):
