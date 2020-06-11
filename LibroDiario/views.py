@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from django.utils import timezone
+from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 
 from LibroDiario.filters import FiltroProductos
 from LibroDiario.forms import FormularioProducto
