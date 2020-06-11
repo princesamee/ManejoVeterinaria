@@ -19,8 +19,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='registration/login.html')),
     path('admin/', admin.site.urls),
     path('cuentas/', include('django.contrib.auth.urls')),
-    path('libroDiario/', include('LibroDiario.urls')),
+    path('', include('LibroDiario.urls')),
 ]
