@@ -17,10 +17,6 @@ class Producto(models.Model):
     fecha_creacion = models.DateTimeField(default=timezone.now)
     fecha_ultima_modificacion = models.DateTimeField(default=timezone.now)
 
-    def actualizar(self):
-        self.fecha_ultima_modificacion = timezone.now()
-        self.save()
-
     def __str__(self):
         return self.nombre
 
@@ -32,5 +28,6 @@ class MovimientoLibro(models.Model):
     egreso = models.BooleanField(default=True)
 
     def __str__(self):
-
-        return ("Egreso" if self.egreso else "Ingreso") + " de " + self.producto.nombre + ", fecha: " + self.fecha_movimiento
+        return (
+                   "Egreso" if self.egreso else "Ingreso") + " de " + self.producto.nombre + ", fecha: " + str(
+            self.fecha_movimiento)

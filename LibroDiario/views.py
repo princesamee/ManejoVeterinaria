@@ -24,6 +24,7 @@ def producto_nuevo(request):
         if form.is_valid():
             producto = form.save(commit=False)
             producto.fecha_creacion = timezone.now()
+            producto.fecha_ultima_modificacion = timezone.now()
             producto.save()
             return redirect('detalle_producto', pk=producto.pk)
     else:
@@ -38,7 +39,7 @@ def editar_producto(request, pk):
         form = FormularioProducto(request.POST, instance=producto)
         if form.is_valid():
             producto = form.save(commit=False)
-            producto.published_date = timezone.now()
+            producto.fecha_ultima_modificacion = timezone.now()
             producto.save()
             return redirect('detalle_producto', pk=producto.pk)
     else:
