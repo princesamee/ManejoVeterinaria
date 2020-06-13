@@ -8,7 +8,7 @@ from .models import Producto
 
 
 def post_productos(request):
-    productos = Producto.objects.all().order_by('nombre')
+    productos = Producto.objects.filter(habilitado=True).order_by('nombre')
     filtro_productos = FiltroProductos(request.GET, queryset=productos)
     return render(request, 'LibroDiario/post_productos.html', {'filter': filtro_productos})
 
@@ -18,7 +18,7 @@ def detalle_producto(request, pk):
     return render(request, 'LibroDiario/detalle_producto.html', {'producto': producto})
 
 
-def producto_nuevo(request):
+def producto_nuevo(request, codigo):
     if request.method == "POST":
         form = FormularioProducto(request.POST)
         if form.is_valid():
@@ -28,9 +28,17 @@ def producto_nuevo(request):
             producto.save()
             return redirect('detalle_producto', pk=producto.pk)
     else:
-        form = FormularioProducto()
-
+        default_data = {'codigo_de_barras': codigo}
+        form = FormularioProducto(default_data)
     return render(request, 'LibroDiario/editar_producto.html', {'form': form})
+
+
+def editar_producto_con_codigo_de_barras(request, codigo):
+    producto = Producto.objects.filter(codigo_de_barras=codigo)
+    if len(producto) == 0:
+        return redirect('producto_nuevo', codigo=codigo)
+    else:
+        return redirect('editar_producto', pk=producto[0].pk)
 
 
 def editar_producto(request, pk):
@@ -39,9 +47,20 @@ def editar_producto(request, pk):
         form = FormularioProducto(request.POST, instance=producto)
         if form.is_valid():
             producto = form.save(commit=False)
+            producto.habilitado = True
             producto.fecha_ultima_modificacion = timezone.now()
             producto.save()
             return redirect('detalle_producto', pk=producto.pk)
     else:
         form = FormularioProducto(instance=producto)
     return render(request, 'LibroDiario/editar_producto.html', {'form': form})
+
+
+def borrar_producto(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == "POST":
+        producto.habilitado = False
+        producto.fecha_ultima_modificacion = timezone.now()
+        producto.save()
+        return redirect('post_productos')
+    return render(request, 'LibroDiario/borrar_producto.html', {'producto': producto})

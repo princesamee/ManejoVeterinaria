@@ -1,0 +1,25 @@
+{% extends 'LibroDiario/base.html' %}
+
+
+{% block content %}
+    <h1>¿Confirma que desea eliminar el producto ({{ producto.nombre }}) de la lista de disponibles?</h1>
+    <p>Para poder habilitar nuevamente este producto podrá hacerlo desde la consola de administración. </p>
+    <form action="" method="post">{% csrf_token %}
+
+        <div class="row">
+            <div class="col-xs-3" id="cancelar">
+                <a class="btn" href="{% url 'post_productos' %}">
+                    <span class="glyphicon glyphicon-step-backward"></span> Cancelar</a>
+            </div>
+            <div class="float-right col-xs-9" id="eliminar">
+                {% if user.is_authenticated %}
+                    <input class="btn-red save btn" type="submit" value="Eliminar"/>
+                {% else %}
+                    <p>Debe ingresar al sistema para poder borrar productos. </p>
+                {% endif %}
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}

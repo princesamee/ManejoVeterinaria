@@ -1,11 +1,13 @@
 {% extends 'LibroDiario/base.html' %}
 
 {% block content %}
+
     <h2>Lista de productos</h2>
     <form method="get">
         {{ filter.form.as_p }}
-        <button type="submit">Buscar</button>
+        <button class=btn type="submit">Buscar</button>
     </form>
+
     {% for producto in filter.qs %}
 
         <div class="producto">

@@ -1,10 +1,31 @@
 {% extends 'LibroDiario/base.html' %}
 
 {% block content %}
-    <h2>Nuevo Producto</h2>
+    <h2>Editar Producto</h2>
     <form method="POST" class="product-form">{% csrf_token %}
+        {% if not form.instance.habilitado %}
+            <p>El producto esta afuera de su base de productos <em>habilitados</em>.</p>
+            <p>El producto será habilitado nuevamente si presiona Guardar.</p>
+            <p>Puede volver atrás para cancelar.
+                <a class="btn-red btn" href="{% url 'post_productos' %}">
+                    <span class="glyphicon glyphicon-step-backward"></span></a>
+            </p>
+        {% endif %}
         {{ form.as_p }}
-        <button type="Submit" class="save btn btn-default">Guardar</button>
+        <div class="row">
+            <div class="col-xs-3" id="listado_productos">
+                <a class="btn btn-gris" href="{% url 'post_productos' %}">
+                    <span class="glyphicon glyphicon-th-list"></span> Volver</a>
+            </div>
+            <div class="col-xs-9" id="guardar_producto">
+                {% if user.is_authenticated %}
+                    <button type="Submit" class="save btn">Guardar</button>
+                {% else %}
+                    <p>Debe ingresar al sistema para poder editar productos. </p>
+                {% endif %}
+            </div>
+        </div>
+
     </form>
 {% endblock %}
 

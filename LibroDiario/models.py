@@ -16,6 +16,7 @@ class Producto(models.Model):
     categoria = models.ForeignKey(CategoriaProducto, on_delete=models.DO_NOTHING)
     fecha_creacion = models.DateTimeField(default=timezone.now)
     fecha_ultima_modificacion = models.DateTimeField(default=timezone.now)
+    habilitado = models.BooleanField(default=True)
 
     def __str__(self):
         return self.nombre

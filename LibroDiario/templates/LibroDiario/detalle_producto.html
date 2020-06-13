@@ -2,19 +2,39 @@
 
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <a class="btn btn-default" href="{% url 'editar_producto' pk=producto.pk %}"><span
-                class="glyphicon glyphicon-pencil"></span></a>
-    {% endif %}
 
-    <div class="producto">
-        {% if producto.fecha_creacion %}
-            <div class="date">
-                {{ producto.fecha_creacion }}
-            </div>
-        {% endif %}
+    <div class="row producto">
+        <div class="date">
+            Ultima modificación: {{ producto.fecha_creacion }}
+        </div>
         <h2>{{ producto.nombre }}</h2>
         <h3>{{ producto.categoria }}</h3>
         <p>{{ producto.descripcion|linebreaksbr }}</p>
+
+        <div class="row">
+            <div class="col-xs-3" id="listado_productos">
+                <a class="btn btn-gris" href="{% url 'post_productos' %}">
+                    <span class="glyphicon glyphicon-th-list"></span> Volver</a>
+            </div>
+            {% if producto.habilitado %}
+                <div class="col-xs-3" id="editar">
+                    {% if user.is_authenticated %}
+                        <a class="btn" href="{% url 'editar_producto' pk=producto.pk %}">
+                            <span class="glyphicon glyphicon-pencil"></span></a>
+                    {% endif %}
+                </div>
+                <div class="col-xs-3" id="eliminar">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-red" href="{% url 'borrar_producto' pk=producto.pk %}">
+                            <span class="glyphicon glyphicon-trash"></span></a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+        {% if not producto.habilitado %}
+            <h2>El producto se encuentra desahilitado de su stock.</h2>
+            <p>Debe ingresar como administrador para volver a habilitarlo o escanearlo y guardarlo nuevamente. </p>
+        {% endif %}
     </div>
 {% endblock %}

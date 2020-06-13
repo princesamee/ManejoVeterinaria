@@ -14,6 +14,7 @@
     margin-left: 40px;
     margin-right: 40px;
     margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 h1, h2, h3, h4 {
@@ -35,7 +36,7 @@ p {
     font-size: 14px;
 }
 
-.producto h2 a{
+.producto h2 a {
     color: #108B51;
     font-size: 28px;
 }
@@ -54,10 +55,67 @@ p {
     float: right;
     font-size: 20pt;
     margin-right: 20px;
+    padding: 20px 20px 20px 40px;
 }
 
 .top-user, .top-user:hover, .top-user:visited {
     color: #ffffff;
     font-size: 20pt;
     margin-left: 20px;
+    padding: 20px 20px 20px 40px;
+}
+
+/* Style buttons */
+.btn {
+    background-color: #68B591;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: #108B51;
+    color: white; /* White text */
+}
+
+.btn-non-clickable {
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+}
+
+
+.btn-red {
+    background-color: red;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn-red:hover {
+    background-color: darkred;
+    color: white; /* White text */
+}
+
+
+.btn-gris {
+    background-color: lightgray;
+    border: none; /* Remove borders */
+    color: black; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn-gris:hover {
+    background-color: darkgray;
+    color: black; /* White text */
 }
